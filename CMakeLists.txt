@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.15)
+project(ira VERSION 0.1 DESCRIPTION "ira is a package manager for BIQ-Cat OS")
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_subdirectory(src)
+set_target_properties(ira_db PROPERTIES PUBLIC_HEADER include/ira_db.h)
+target_include_directories(ira_db PUBLIC include)
+
+enable_testing()
+add_subdirectory(tests)
