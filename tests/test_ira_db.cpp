@@ -7,18 +7,18 @@
 
 void backup()
 {
-    std::filesystem::copy(ira::DB_DESTINATION, ira::DB_DESTINATION + "_backup");
-    std::filesystem::remove(ira::DB_DESTINATION);
+    std::filesystem::copy(ira::UserDB::DESTINATION, ira::UserDB::DESTINATION + "_backup");
+    std::filesystem::remove(ira::UserDB::DESTINATION);
 }
 
 void restore()
 {
-    if (std::filesystem::exists(ira::DB_DESTINATION))
+    if (std::filesystem::exists(ira::UserDB::DESTINATION))
     {
-        std::filesystem::remove(ira::DB_DESTINATION);
+        std::filesystem::remove(ira::UserDB::DESTINATION);
     }
-    std::string backup_file = ira::DB_DESTINATION + "_backup";
-    std::filesystem::copy(backup_file, ira::DB_DESTINATION);
+    std::string backup_file = ira::UserDB::DESTINATION + "_backup";
+    std::filesystem::copy(backup_file, ira::UserDB::DESTINATION);
     std::filesystem::remove(backup_file);
 }
 
@@ -33,18 +33,17 @@ TEST(TestIraDB, TestMakeIndependantDB)
     std::filesystem::remove(test_destination);
 }
 
-TEST(TestIraDB, TestMakeUserDependantDB)
+TEST(TestIraDB, TestMakeUserDB)
 {
     // Making backup
     bool has_backup = false;
-    if (std::filesystem::exists(ira::DB_DESTINATION))
+    if (std::filesystem::exists(ira::UserDB::DESTINATION))
     {
         backup();
+        has_backup = true;
     }
-    ira::DB db;
-    std::string homedir = getenv("HOME");
-    EXPECT_TRUE(std::filesystem::exists(homedir + "/.local/ira/db.sqlite3"));
-
+    ira::UserDB db;
+    EXPECT_TRUE(std::filesystem::exists(db.DESTINATION));
     if (has_backup)
     {
         restore();
