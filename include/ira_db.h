@@ -2,8 +2,8 @@
 #define DB_H
 
 #include <filesystem>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <sys/stat.h>
 
@@ -25,7 +25,8 @@ namespace ira
     class UserDB : public DB
     {
     public:
-        static inline const std::string DESTINATION{static_cast<std::string>(getenv("HOME")) + "/.local/ira/db.sqlite3"};
+        static inline const std::string DESTINATION{
+            static_cast<std::string>(getenv("HOME")) + "/.local/ira/db.sqlite3"};
         UserDB();
 
     private:
@@ -40,8 +41,7 @@ namespace ira
 
     private:
         SystemDB(const char *path);
-        
     };
 
-};
+};     // namespace ira
 #endif // DB_H

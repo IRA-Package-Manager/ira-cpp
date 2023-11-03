@@ -1,5 +1,5 @@
-include(CTest)
+include(CTest) 
 set(TEST_BINARY ${PROJECT_NAME}_test)
-add_executable(${TEST_BINARY} test_ira_db.cpp)
+add_executable(${TEST_BINARY} test_ira_db.cpp) 
 target_link_libraries(${TEST_BINARY} ira_db gtest sqlite3 gtest_main pthread)
 add_test(test_1 ${TEST_BINARY})

@@ -1,13 +1,14 @@
+#include "sqlite3.h"
+#include <filesystem>
 #include <gtest/gtest.h>
 #include <string>
-#include <filesystem>
-#include "sqlite3.h"
 
 #include "ira_db.h"
 
 void backup()
 {
-    std::filesystem::copy(ira::UserDB::DESTINATION, ira::UserDB::DESTINATION + "_backup");
+    std::filesystem::copy(ira::UserDB::DESTINATION,
+                          ira::UserDB::DESTINATION + "_backup");
     std::filesystem::remove(ira::UserDB::DESTINATION);
 }
 

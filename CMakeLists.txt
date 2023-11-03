@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory(src)
 set_target_properties(ira_db PROPERTIES PUBLIC_HEADER include/ira_db.h)
 target_include_directories(ira_db PUBLIC include)
-
+add_executable(ira cli/main.cpp)
+target_link_libraries(ira PUBLIC ira_db)
 enable_testing()
 add_subdirectory(tests)
