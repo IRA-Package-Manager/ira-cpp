@@ -1,11 +1,25 @@
 cmake_minimum_required(VERSION 3.15)
-project(ira VERSION 0.1 DESCRIPTION "ira is a package manager for BIQ-Cat OS")
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+project(IRA VERSION 0.1)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+file(GLOB cli_source src/cli/*.cpp)
+set(GLOB headers include/*.hpp)
+add_executable(ipkg ${cli_source})
+
 add_subdirectory(src)
-set_target_properties(ira_db PROPERTIES PUBLIC_HEADER include/ira_db.h)
-target_include_directories(ira_db PUBLIC include)
-add_executable(ira cli/main.cpp)
-target_link_libraries(ira PUBLIC ira_db)
-enable_testing()
+include_directories(headers)
+target_link_libraries(ipkg PUBLIC ira_db)
+
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
 add_subdirectory(tests)

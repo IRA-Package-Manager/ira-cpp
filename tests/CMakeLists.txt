@@ -1,5 +1,6 @@
-include(CTest) 
-set(TEST_BINARY ${PROJECT_NAME}_test)
-add_executable(${TEST_BINARY} test_ira_db.cpp) 
-target_link_libraries(${TEST_BINARY} ira_db gtest sqlite3 gtest_main pthread)
-add_test(test_1 ${TEST_BINARY})
+file(GLOB test_db_src db/*.cpp)
+add_executable(test_ira_db ${test_db_src})
+target_link_libraries(test_ira_db ira_db GTest::gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(test_ira_db)

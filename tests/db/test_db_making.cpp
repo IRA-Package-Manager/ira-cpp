@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 #include <string>
 
-#include "ira_db.h"
+#include "../../include/ira_db.hpp"
 
 void backup()
 {
