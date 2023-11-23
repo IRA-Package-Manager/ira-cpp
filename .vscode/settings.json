@@ -85,5 +85,8 @@
     "prettier.insertPragma": true,
     "[go.mod]": {
         "editor.defaultFormatter": "golang.go"
+    },
+    "[go]": {
+        "editor.defaultFormatter": "golang.go"
     }
 }

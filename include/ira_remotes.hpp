@@ -11,7 +11,7 @@ namespace ira
     public:
         RemoteServer(std::string host, int port);
         ~RemoteServer();
-        void Serve(std::filesystem::path dir);
+        int Serve(std::filesystem::path dir);
 
     private:
         std::string host;

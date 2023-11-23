@@ -7,8 +7,6 @@
 #include <string>
 #include <sys/stat.h>
 
-#include "sqlite3.h"
-
 namespace ira
 {
     class DB
@@ -18,7 +16,7 @@ namespace ira
         ~DB();
 
     protected:
-        sqlite3 *innerDB;
+        void **innerDB;
         std::filesystem::path path;
     };
 

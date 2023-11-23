@@ -1,5 +1,8 @@
 #include "../../include/ira_db.hpp"
 
+#include <sqlite3.h>
+#include <iostream>
+
 using namespace ira;
 DB::DB(const char *path)
 {
@@ -9,11 +12,13 @@ DB::DB(const char *path)
     {
         std::filesystem::create_directories(base);
     }
-    int code = sqlite3_open(path, &innerDB);
+    sqlite3 *db;
+    int code = sqlite3_open(path, &db);
     if (code != SQLITE_OK)
     {
         throw code;
     }
+    innerDB = (void **)&db;
 }
 
 UserDB::UserDB() : DB::DB(UserDB::DESTINATION.c_str())
@@ -38,5 +43,5 @@ SystemDB::SystemDB() : DB::DB(SystemDB::DESTINATION.c_str())
 
 DB::~DB()
 {
-    sqlite3_close(innerDB);
+    sqlite3_close(*(sqlite3 **)innerDB);
 }
