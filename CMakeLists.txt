@@ -1,16 +1,18 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.24)
 project(IRA VERSION 0.1)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+add_subdirectory(ffi)
+
 file(GLOB cli_source src/cli/*.cpp)
 set(GLOB headers include/*.hpp)
 add_executable(ipkg ${cli_source})
-
 add_subdirectory(src)
 include_directories(headers)
-target_link_libraries(ipkg PUBLIC ira_db)
+
+target_link_libraries(ipkg PUBLIC ira_db ira_remote)
 
 include(FetchContent)
 FetchContent_Declare(
