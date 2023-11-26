@@ -1,0 +1,3 @@
+[submodule "ffi/remote"]
+	path = ffi/remote
+	url = https://github.com/IRA-Package-Manager/goremote
