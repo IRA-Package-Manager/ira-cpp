@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
         }
         ira::DB db(argv[2]);
     }
-    if (command == "run_server")
+    else if (command == "run_server")
     {
         if (argc == 2)
         {
@@ -36,5 +36,10 @@ int main(int argc, char *argv[])
         }
         auto srv = ira::RemoteServer("", port);
         std::cout << srv.Serve(dir);
+    }
+    else
+    {
+        std::cerr << "Incorrect argument: " << command << std::endl;
+        return -1;
     }
 }
